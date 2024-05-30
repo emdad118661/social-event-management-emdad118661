@@ -16,7 +16,7 @@ const Header = () => {
                         {navlinks}
                     </ul>
                 </div>
-                <a className="text-xl btn btn-ghost">daisyUI</a>
+                <a className="text-xl btn btn-ghost">Emdad Event Management</a>
             </div>
             <div className="hidden navbar-center lg:flex">
                 <ul className="px-1 menu menu-horizontal">
