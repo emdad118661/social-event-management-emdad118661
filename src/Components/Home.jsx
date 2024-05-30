@@ -1,5 +1,6 @@
 
 import Services from "./Services";
+import SocialConnections from "./SocialConnections";
 import UpcomingEvents from "./UpcomingEvents";
 const Home = () => {
     return (
@@ -17,6 +18,9 @@ const Home = () => {
             </div>
             <br />
             <Services></Services>
+            <br />
+            <SocialConnections></SocialConnections>
+            <br />
         </div>
 
     );
