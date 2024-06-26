@@ -13,6 +13,9 @@ const Header = () => {
     const navlinks = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/login">Login</NavLink></li>
+        {
+            user && <p className="mt-3 mb-5">{user.email}</p>
+        }
     </>
     return (
         <div className="navbar bg-base-100">
@@ -24,6 +27,7 @@ const Header = () => {
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                         {navlinks}
                     </ul>
+
                 </div>
                 <a className="text-xl btn btn-ghost">Emdad Event Management</a>
             </div>
@@ -35,7 +39,6 @@ const Header = () => {
             <div className="navbar-end">
                 {
                     user ? <div className="flex">
-                        <p className="mt-3 mr-2">{user.email}</p>
                         <button onClick={handleLogOut} className="btn">Logout</button>
                     </div>
                         :
