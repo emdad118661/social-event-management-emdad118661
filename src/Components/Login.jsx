@@ -1,11 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+
 
 const Login = () => {
     const { signIn } = useContext(AuthContext);
 const location = useLocation();
 const navigate = useNavigate();
+
+const [loginError, setLoginError] = useState('');
 
     const handleLogin = e => {
         e.preventDefault();
@@ -22,7 +25,8 @@ const navigate = useNavigate();
                 navigate(location?.state ? location.state : "/");
             })
             .catch(error => {
-                console.log(error);
+                console.log(error.message);
+                setLoginError(error.message);
             })
             
     }
@@ -53,6 +57,9 @@ const navigate = useNavigate();
                             <button className="btn btn-primary">Login</button>
                         </div>
                     </form>
+                    {
+                        loginError && <p className="mb-4 text-center text-red-700">{loginError}</p>
+                    }
                     <small className="mb-5 text-center">New here? Please <Link className="font-extrabold text-blue-900" to="/register">Register</Link></small>
                 </div>
 

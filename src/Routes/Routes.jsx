@@ -8,6 +8,7 @@ import ServiceDetails from '../Components/ServiceDetails.jsx';
 import Register from "../Components/Register.jsx";
 import Login from "../Components/Login.jsx";
 import PrivateRoutes from "./PrivateRoutes.jsx";
+import UpcommingEventsDetails from "../Components/UpcommingEventsDetails.jsx";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +32,11 @@ const router = createBrowserRouter([
         {
             path: "/login",
             element: <Login></Login>
+        },
+        {
+          path: "/upcommingEvents",
+          element: <UpcommingEventsDetails></UpcommingEventsDetails>,
+          loader: ()=>fetch("/upcomingEvents.json")
         }
       ],
     },

@@ -1,10 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 
 const Register = () => {
-    const {createUser, signInWithGoogle, provider} = useContext(AuthContext);
+    const { createUser, signInWithGoogle, provider } = useContext(AuthContext);
+    const [registerError, setRegisterError] = useState('');
+    // const [success, setSuccess] = useState('');
     const handleRegister = e => {
         e.preventDefault();
         console.log(e.currentTarget)
@@ -14,33 +16,53 @@ const Register = () => {
         const password = form.get("password");
         console.log(name, email, password);
 
+        // reset error and success
+        setRegisterError('');
+        // setSuccess('');
+
+        if (password.length < 6) {
+            setRegisterError('Password should be at least 6 characters or longer');
+            return;
+        }
+        else if (!/[A-Z]/.test(password)) {
+            setRegisterError('Your password should have at least one upper case characters')
+            return;
+        }
+        else if (!/[!@#$%^&*]/.test(password)) {
+            setRegisterError('Your password should have at least one special character')
+            return;
+        }
+
+
+
+
         //create user
         createUser(email, password)
-        .then(result=>{
-            console.log(result.user);
-            Swal.fire({
-                icon: "success",
-                title: "You are registered successfully!!",
-                showConfirmButton: false,
-                timer: 1500
-              });
-            
-        })
-        .catch(error=>{
-            console.log(error);
-        })
+            .then(result => {
+                console.log(result.user);
+                Swal.fire({
+                    icon: "success",
+                    title: "You are registered successfully!!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
-    const handleGoogleSignIn = () =>{
+    const handleGoogleSignIn = () => {
         signInWithGoogle(provider)
-        .then(result=>{
-            const user = result.user;
-            console.log(user);
-        })
-        .catch(error=>{
-            const errorMassage = error.message;
-            console.log(errorMassage);
-        })
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => {
+                const errorMassage = error.message;
+                console.log(errorMassage);
+            })
     }
     return (
         <div>
@@ -75,10 +97,13 @@ const Register = () => {
                             <button className="btn btn-primary">Register</button>
                         </div>
                     </form>
+                    {
+                        registerError && <p className="text-red-700">{registerError}</p>
+                    }
                     <button onClick={handleGoogleSignIn} className="btn btn-primary">SignIn with Google</button>
                     <small className="mb-5 text-center">Already have an account? Please <Link className="font-extrabold text-blue-900" to="/login">Login</Link></small>
                 </div>
-                
+
             </div>
         </div>
 
