@@ -7,6 +7,7 @@ import Home from '../Components/Home.jsx';
 import ServiceDetails from '../Components/ServiceDetails.jsx';
 import Register from "../Components/Register.jsx";
 import Login from "../Components/Login.jsx";
+import PrivateRoutes from "./PrivateRoutes.jsx";
 
 const router = createBrowserRouter([
     {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
         },
         {
           path: "/service/:id",
-          element: <ServiceDetails></ServiceDetails>,
+          element: <PrivateRoutes><ServiceDetails></ServiceDetails></PrivateRoutes>,
           loader: () => fetch("/services.json"),
         },
         {

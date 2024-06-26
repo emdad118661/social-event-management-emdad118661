@@ -16,7 +16,7 @@ const UpcomingEvents = () => {
             <button className="btn btn-primary">Upcoming Events</button>
             <Marquee pauseOnHover={true} speed={50}>
                 {
-                    upcomingEvents.map(upcomingEvent => <UpcomingEvent key={upcomingEvents.id} upcomingEvent={upcomingEvent}></UpcomingEvent>)
+                    upcomingEvents.map(upcomingEvent => <UpcomingEvent key={upcomingEvent.id} upcomingEvent={upcomingEvent}></UpcomingEvent>)
                 }
             </Marquee>
         </div>
