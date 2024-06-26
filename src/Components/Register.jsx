@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Register = () => {
-    const {createUser} = useContext(AuthContext);
+    const {createUser, signInWithGoogle, provider} = useContext(AuthContext);
     const handleRegister = e => {
         e.preventDefault();
         console.log(e.currentTarget)
@@ -17,9 +18,28 @@ const Register = () => {
         createUser(email, password)
         .then(result=>{
             console.log(result.user);
+            Swal.fire({
+                icon: "success",
+                title: "You are registered successfully!!",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            
         })
         .catch(error=>{
             console.log(error);
+        })
+    }
+
+    const handleGoogleSignIn = () =>{
+        signInWithGoogle(provider)
+        .then(result=>{
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(error=>{
+            const errorMassage = error.message;
+            console.log(errorMassage);
         })
     }
     return (
@@ -52,12 +72,13 @@ const Register = () => {
                             </label>
                         </div>
                         <div className="mt-6 form-control">
-                            <button className="btn btn-primary">Login</button>
+                            <button className="btn btn-primary">Register</button>
                         </div>
                     </form>
+                    <button onClick={handleGoogleSignIn} className="btn btn-primary">SignIn with Google</button>
                     <small className="mb-5 text-center">Already have an account? Please <Link className="font-extrabold text-blue-900" to="/login">Login</Link></small>
                 </div>
-
+                
             </div>
         </div>
 
