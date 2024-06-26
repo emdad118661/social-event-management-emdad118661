@@ -1,8 +1,9 @@
 import { MdOutlineDateRange } from "react-icons/md";
 import { IoMdTime } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
+import { Link } from "react-router-dom";
 const UpcommingEventDetail = ({ data }) => {
-    const { event_name, date, time, location, description } = data;
+    const { id, event_name, date, time, location, description } = data;
     return (
         <div className="shadow-xl card bg-base-100 w-96">
             <div className="card-body">
@@ -17,7 +18,9 @@ const UpcommingEventDetail = ({ data }) => {
                 <br />
                 <p className="flex">{description}</p>
                 <div className="justify-end card-actions">
-                    <button className="btn btn-primary">Details</button>
+                    <Link to={`/upcommingEvents/${id}`}>
+                        <button className="btn btn-primary">Details</button>
+                    </Link>
                 </div>
             </div>
         </div>
